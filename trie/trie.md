@@ -85,3 +85,6 @@ insertion becomes more complicated, because an entry may need to be
 split if only a portion of the prefix is shared. This formulation is
 commonly called a *patricia trie*.
 
+## Resources
+
+* [Lookup Trees - Learn Lisp the Hard Way](https://github.com/LispTO/llthw/blob/master/book/1-05-0-lookups-trees.md#exercise-1511)
