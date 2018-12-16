@@ -1,0 +1,85 @@
+\section{Euler's method for solving ordinary differential equations}
+
+Euler's method is one of the most simple ways of approximating an
+unknown function defined by an ordinary differential equation
+(ODE). Consider first the following first-order ODE:
+
+\begin{equation}
+  \label{eulers-method:ode}
+  y'\left(t\right) = f\left(t, y\left(t\right)\right)
+\end{equation}
+
+Now, from the definition of the derivative:
+
+\begin{equation}
+  \lim_{h\to0} \frac{y \left( t + h \right) - y \left( t \right)}{h} =
+  y'\left(t\right)
+\end{equation}
+
+So write:
+
+\begin{equation}
+  y'\left(t\right) = \frac{y\left(t + h\right) - y\left(t\right)}{h}
+\end{equation}
+
+Substitute \ref{eulers-method:ode} and rearrange:
+
+\begin{equation}
+  y \left( t + h \right) = y\left(t\right) + h f \left( t, y \left( t
+  \right) \right)
+\end{equation}
+
+Letting \(t_n = t + nh\):
+
+\begin{equation}
+  y \left( t_{n + 1} \right) = y \left( t_n \right) + h f \left( t_n,
+  y \left( t_n \right) \right)
+\end{equation}
+
+Letting \(y_n = y \left( t_n \right) \):
+
+\begin{equation}
+  \label{eulers-method:eqn}
+  y_{n + 1} = y_n + h f \left( t_n, y_n \right)
+\end{equation}
+
+The following Guile scheme code implements \ref{eulers-method:eqn} as
+a solver in the special case \( f \left( t, y\left( t\right) \right) =
+g \left( y \left( t \right) \right) \):
+
+\lstinputlisting[language=lisp]{eulers-method.scm}
+
+This method may also be used for a higher-order ODE by rewriting it as
+a set of first-order ODEs. For example, the equation
+
+\begin{equation}
+  y'' \left( t \right) = f \left( t, y \left( t \right), y'\left(t\right) \right)
+\end{equation}
+
+can be rewritten as
+
+\begin{equation}
+  \begin{aligned}
+    z\left(t\right) &= y'\left(t\right) \\
+    z'\left(t\right) &= f \left( t, y\left( t\right), z \left( t \right) \right)
+  \end{aligned}
+\end{equation}
+
+Applying \ref{eulers-method:eqn}:
+
+\begin{equation}
+  \begin{aligned}
+    z_{n+1} &= z_n + h f \left( t_n, y_n, z_n \right) \\
+    y_{n+1} &= y_n + hz_n
+  \end{aligned}
+\end{equation}
+
+which can be solved given initial \(y_0\) and \(z_0\).
+
+\subsection*{References}
+
+\begin{itemize}
+\item
+  \href{https://en.wikipedia.org/wiki/Euler\_method}{Euler method -
+    Wikipedia}
+\end{itemize}
